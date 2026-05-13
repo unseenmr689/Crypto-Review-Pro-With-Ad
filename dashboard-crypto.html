@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoControl Dashboard</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body class="bg-primary-bg text-text-main min-h-screen">
+    
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-secondary-bg border-r border-white/5 flex flex-col">
+            <div class="p-8">
+                <h1 class="text-xl font-black italic tracking-tighter">
+                    <span class="text-accent-green">CRYPTO</span>CONTROL
+                </h1>
+            </div>
+            <nav class="flex-1 px-4 py-4 space-y-2">
+                <button onclick="showSection('posts-list')" class="w-full text-left px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest text-accent-green bg-accent-green/10">Manage Intel</button>
+                <button onclick="showSection('new-post')" class="w-full text-left px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest text-text-main/40 hover:text-text-main hover:bg-white/5 transition-all">Publish Intelligence</button>
+            </nav>
+            <div class="p-6 border-t border-white/5">
+                <div class="flex items-center gap-3 mb-4">
+                    <img id="admin-avatar" src="" class="w-8 h-8 rounded-full bg-accent-blue/20">
+                    <div>
+                        <p id="admin-name" class="text-[10px] font-bold uppercase tracking-widest truncate max-w-[120px]">Admin</p>
+                        <p class="text-[8px] text-accent-green font-bold uppercase">Online</p>
+                    </div>
+                </div>
+                <button id="logout-btn" class="w-full py-2 text-[10px] font-bold uppercase tracking-widest text-red-500/60 hover:text-red-500 transition-colors">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-12">
+            <!-- Posts List Section -->
+            <section id="posts-list-section" class="section">
+                <div class="flex items-center justify-between mb-12">
+                    <h2 class="text-3xl font-black tracking-tight">Active Intelligence</h2>
+                    <button onclick="showSection('new-post')" class="btn-accent text-xs">New Intel</button>
+                </div>
+                <div class="glass-card overflow-hidden">
+                    <table class="w-full text-left text-xs uppercase tracking-widest font-bold">
+                        <thead class="bg-white/5 text-text-main/20">
+                            <tr>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Title</th>
+                                <th class="px-6 py-4">Category</th>
+                                <th class="px-6 py-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="posts-table-body">
+                            <!-- Rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Editor Section -->
+            <section id="new-post-section" class="section hidden">
+                <div class="flex items-center gap-4 mb-12">
+                    <button onclick="showSection('posts-list')" class="text-accent-green text-xs font-bold uppercase tracking-widest hover:translate-x-[-4px] transition-transform flex items-center gap-2">
+                        &lsaquo; Back to List
+                    </button>
+                    <h2 id="editor-title" class="text-3xl font-black tracking-tight">Publish New Intelligence</h2>
+                </div>
+
+                <form id="post-form" class="space-y-8 max-w-5xl">
+                    <input type="hidden" id="post-id">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Intel Title</label>
+                                <input type="text" id="title" required class="w-full bg-secondary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Slug (URL)</label>
+                                <input type="text" id="slug" required class="w-full bg-secondary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors" placeholder="bitcoin-review-2026">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Category</label>
+                                <select id="category" class="w-full bg-secondary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors appearance-none">
+                                    <option value="Coins">Coins</option>
+                                    <option value="Exchanges">Exchanges</option>
+                                    <option value="Wallets">Wallets</option>
+                                    <option value="Guides">Guides</option>
+                                    <option value="Scam Alerts">Scam Alerts</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Featured Image URL</label>
+                                <input type="text" id="featuredImage" required class="w-full bg-secondary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Short Excerpt</label>
+                                <textarea id="excerpt" class="w-full bg-secondary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors h-24"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Full Intel Content</label>
+                            <button type="button" onclick="insertCTA()" class="text-[10px] font-bold uppercase tracking-widest bg-accent-blue/20 text-accent-blue px-3 py-1 rounded hover:bg-accent-blue/30 transition-all">+ Add CTA Button</button>
+                        </div>
+                        <textarea id="content" class="h-96"></textarea>
+                    </div>
+
+                    <div class="glass-card p-10 space-y-6">
+                        <p class="text-xs font-black uppercase tracking-[0.2em] mb-4 text-accent-blue">SEO Configuration Units</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Meta Title</label>
+                                <input type="text" id="metaTitle" class="w-full bg-primary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black uppercase tracking-widest text-text-main/40 mb-2">Meta Description</label>
+                                <input type="text" id="metaDescription" class="w-full bg-primary-bg border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-accent-green transition-colors">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-10">
+                        <button type="submit" class="btn-accent">Sync & Publish Intel</button>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" id="published" checked class="hidden peer">
+                            <div class="w-6 h-6 border-2 border-white/10 rounded-md peer-checked:bg-accent-green peer-checked:border-accent-green transition-all flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-primary-bg"><path d="M20 6 9 17l-5-5"></path></svg>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-text-main/40 group-hover:text-text-main transition-colors">Public Deployment</span>
+                        </label>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        import { auth, db, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp, onAuthStateChanged, signOut } from '/assets/js/firebase.js';
+
+        // Protected Route
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = '/admin-login-crypto.html';
+                return;
+            }
+            
+            const isAdmin = user.email === 'admin@cryptosite.com' || user.email === 'unseenmr689@gmail.com';
+            if (!isAdmin) {
+                signOut(auth);
+                window.location.href = '/admin-login-crypto.html';
+                return;
+            }
+
+            document.getElementById('admin-name').textContent = user.displayName || user.email;
+            document.getElementById('admin-avatar').src = user.photoURL || 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1760&auto=format&fit=crop';
+            loadPosts();
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).then(() => window.location.href = '/admin-login-crypto.html');
+        });
+
+        // UI State
+        window.showSection = (section) => {
+            document.getElementById('posts-list-section').classList.add('hidden');
+            document.getElementById('new-post-section').classList.add('hidden');
+            document.getElementById(`${section}-section`).classList.remove('hidden');
+            
+            if (section === 'new-post') {
+                document.getElementById('post-form').reset();
+                document.getElementById('post-id').value = '';
+                document.getElementById('editor-title').textContent = "Publish New Intelligence";
+                tinymce.get('content').setContent('');
+            }
+        };
+
+        // Editor Initialization
+        tinymce.init({
+            selector: '#content',
+            skin: "oxide-dark",
+            content_css: "dark",
+            plugins: 'link lists image code table',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
+            setup: function (editor) {
+                editor.on('init', function () {
+                    editor.getContainer().style.transition = "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out";
+                });
+            }
+        });
+
+        window.insertCTA = () => {
+            const text = prompt("Button Text (e.g. Buy Now):", "Get Bonus");
+            const link = prompt("Button Link:", "https://");
+            if (text && link) {
+                tinymce.get('content').execCommand('mceInsertContent', false, `[CTA: ${text} | ${link}]`);
+            }
+        };
+
+        // Load Posts
+        async function loadPosts() {
+            const tbody = document.getElementById('posts-table-body');
+            tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-text-main/20">Syncing Intel...</td></tr>';
+            const path = 'posts';
+            
+            try {
+                const q = query(collection(db, path), orderBy('createdAt', 'desc'));
+                const snapshot = await getDocs(q);
+                
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-text-main/20">No intelligence found.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = snapshot.docs.map(docSnap => {
+                    const post = docSnap.data();
+                    const statusClass = post.published ? 'text-accent-green' : 'text-yellow-500';
+                    return `
+                        <tr class="border-t border-white/5 hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-black ${statusClass}">${post.published ? 'LIVE' : 'DRAFT'}</td>
+                            <td class="px-6 py-4 truncate max-w-[200px]">${post.title}</td>
+                            <td class="px-6 py-4 text-text-main/40">${post.category}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-4">
+                                    <button onclick="editPost('${docSnap.id}')" class="text-accent-blue hover:underline">Edit</button>
+                                    <button onclick="deletePost('${docSnap.id}')" class="text-red-500/60 hover:text-red-500 transition-colors">Nuke</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error("Load failed:", error);
+                import('/assets/js/firebase.js').then(({ handleFirestoreError }) => {
+                    handleFirestoreError(error, 'list', path);
+                });
+            }
+        }
+
+        // Post CRUD
+        document.getElementById('post-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('post-id').value;
+            const data = {
+                title: document.getElementById('title').value,
+                slug: document.getElementById('slug').value,
+                category: document.getElementById('category').value,
+                featuredImage: document.getElementById('featuredImage').value,
+                excerpt: document.getElementById('excerpt').value,
+                content: tinymce.get('content').getContent(),
+                metaTitle: document.getElementById('metaTitle').value,
+                metaDescription: document.getElementById('metaDescription').value,
+                published: document.getElementById('published').checked,
+                updatedAt: serverTimestamp()
+            };
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, 'posts', id), data);
+                } else {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'posts'), data);
+                }
+                showSection('posts-list');
+                loadPosts();
+            } catch (error) {
+                alert("Intel synchronization failed. Verify permissions.");
+                import('/assets/js/firebase.js').then(({ handleFirestoreError }) => {
+                    handleFirestoreError(error, id ? 'update' : 'create', `posts/${id || ''}`);
+                });
+            }
+        });
+
+        window.editPost = async (id) => {
+            try {
+                // We'll just fetch small local data or re-fetch from Firestore
+                const docRef = doc(db, 'posts', id);
+                const docSnap = await getDocs(query(collection(db, 'posts'))); // For simplicity in this demo we re-fetch all
+                const postDoc = docSnap.docs.find(d => d.id === id);
+                const post = postDoc.data();
+
+                showSection('new-post');
+                document.getElementById('editor-title').textContent = `Editing: ${post.title}`;
+                document.getElementById('post-id').value = id;
+                document.getElementById('title').value = post.title;
+                document.getElementById('slug').value = post.slug;
+                document.getElementById('category').value = post.category;
+                document.getElementById('featuredImage').value = post.featuredImage;
+                document.getElementById('excerpt').value = post.excerpt;
+                document.getElementById('metaTitle').value = post.metaTitle || '';
+                document.getElementById('metaDescription').value = post.metaDescription || '';
+                document.getElementById('published').checked = post.published;
+                tinymce.get('content').setContent(post.content);
+            } catch (error) {
+                console.error("Edit load failed:", error);
+            }
+        };
+
+        window.deletePost = async (id) => {
+            if (confirm("Permanently nuke this intelligence? Corrective actions cannot be undone.")) {
+                try {
+                    await deleteDoc(doc(db, 'posts', id));
+                    loadPosts();
+                } catch (error) {
+                    alert("Destruction sequence failed. Insufficient clearance.");
+                    import('/assets/js/firebase.js').then(({ handleFirestoreError }) => {
+                        handleFirestoreError(error, 'delete', `posts/${id}`);
+                    });
+                }
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "posts": {
+      "title": "Post",
+      "description": "A blog post or crypto review.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the post." },
+        "slug": { "type": "string", "description": "SEO friendly URL slug." },
+        "content": { "type": "string", "description": "The full content of the post (HTML allowed)." },
+        "excerpt": { "type": "string", "description": "Short summary for post cards." },
+        "category": { "type": "string", "description": "Category: Coins, Exchanges, Wallets, Guides, Scam Alerts." },
+        "featuredImage": { "type": "string", "description": "URL of the featured image." },
+        "metaTitle": { "type": "string", "description": "SEO Meta Title." },
+        "metaDescription": { "type": "string", "description": "SEO Meta Description." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "published": { "type": "boolean", "description": "Whether the post is public." }
+      },
+      "required": ["title", "slug", "content", "category", "createdAt"]
+    },
+    "admins": {
+      "title": "Admin",
+      "description": "User allowed to access the dashboard.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/posts/{postId}": {
+      "schema": "posts",
+      "description": "Collection of all blog posts."
+    },
+    "/admins/{adminId}": {
+      "schema": "admins",
+      "description": "List of authorized admin UIDs."
+    }
+  }
+}

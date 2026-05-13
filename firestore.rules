@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isStaticAdmin() {
+      return isEmailVerified() && (request.auth.token.email == 'unseenmr689@gmail.com' || request.auth.token.email == 'admin@cryptosite.com');
+    }
+
+    function isAdmin() {
+      return isStaticAdmin() || (isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation for Posts
+    function isValidPost(data) {
+      return data.title is string && data.title.size() <= 200
+          && data.slug is string && data.slug.size() <= 200
+          && data.content is string && data.content.size() <= 100000
+          && data.category in ['Coins', 'Exchanges', 'Wallets', 'Guides', 'Scam Alerts']
+          && (data.published == true || data.published == false)
+          && data.createdAt is timestamp;
+    }
+
+    // Posts Collection
+    match /posts/{postId} {
+      allow get: if (isAdmin() || (resource.data.published == true)) && isValidId(postId);
+      allow list: if (isStaticAdmin() || (resource.data.published == true));
+      
+      allow create: if isAdmin() 
+          && isValidId(postId)
+          && isValidPost(incoming())
+          && incoming().createdAt == request.time;
+          
+      allow update: if isAdmin()
+          && isValidId(postId)
+          && (
+            // Full update
+            (isValidPost(incoming()) && incoming().updatedAt == request.time && incoming().createdAt == existing().createdAt) ||
+            // Partial status update (if needed, but here we allow full for admin)
+            false
+          );
+          
+      allow delete: if isAdmin() && isValidId(postId);
+    }
+
+    // Admins Collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && request.auth.uid == adminId;
+      allow write: if false;
+    }
+  }
+}

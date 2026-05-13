@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-login-crypto.html
+Disallow: /dashboard-crypto.html
+
+Sitemap: https://crypto-site.vercel.app/sitemap.xml

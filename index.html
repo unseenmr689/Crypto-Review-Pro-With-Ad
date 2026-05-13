@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoReview Pro - Trusted Crypto Guides & Reviews</title>
+    <meta name="description" content="Expert crypto reviews, exchange guides, and wallet comparisons. Stay safe in crypto with our real insights.">
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="CryptoReview Pro">
+    <meta property="og:description" content="Expert crypto reviews, exchange guides, and wallet comparisons.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-primary-bg text-text-main">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-primary-bg/80 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-[1440px] mx-auto px-10 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="logo-icon"></div>
+                <span class="text-xl font-bold tracking-tight text-white uppercase italic">CRYPTO<span class="text-accent-green">REVIEW</span></span>
+            </a>
+            
+            <ul class="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-text-main/60">
+                <li><a href="/" class="text-accent-green">Intel</a></li>
+                <li><a href="/category.html?c=Coins" class="hover:text-white transition-colors">Coins</a></li>
+                <li><a href="/category.html?c=Exchanges" class="hover:text-white transition-colors">Exchanges</a></li>
+                <li><a href="/category.html?c=Wallets" class="hover:text-white transition-colors">Wallets</a></li>
+                <li><a href="/category.html?c=Guides" class="hover:text-white transition-colors">Guides</a></li>
+                <li><a href="/category.html?c=Scam Alerts" class="text-red-400 hover:text-red-500 transition-colors">Scams</a></li>
+            </ul>
+
+            <div class="flex items-center gap-6">
+                <div class="hidden xl:block text-[10px] text-text-main/20 uppercase tracking-tighter">Live: BTC $64,231.12</div>
+                <form id="search-form" class="hidden lg:flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2">
+                    <input type="text" placeholder="Search Intel..." class="bg-transparent border-none outline-none text-[10px] w-32 uppercase tracking-widest placeholder:text-text-main/20">
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-text-main/40 hover:text-accent-green cursor-pointer"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    </button>
+                </form>
+                <button id="menu-btn" class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary-bg border-t border-white/5 p-6 absolute w-full left-0 shadow-2xl">
+            <ul class="space-y-4 text-xs font-bold uppercase tracking-widest">
+                <li><a href="/category.html?c=Coins" class="block">Coins</a></li>
+                <li><a href="/category.html?c=Exchanges" class="block">Exchanges</a></li>
+                <li><a href="/category.html?c=Wallets" class="block">Wallets</a></li>
+                <li><a href="/category.html?c=Guides" class="block">Guides</a></li>
+                <li><a href="/category.html?c=Scam Alerts" class="block text-red-500">Scam Alerts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 py-10">
+        <div class="ad-slot" data-ad="header-banner">Header Banner Ad Placeholder</div>
+    </header>
+
+    <main class="max-w-[1440px] mx-auto px-10 pb-20 flex flex-col lg:flex-row gap-10">
+        <div class="flex-1 space-y-10">
+            <!-- Hero Section -->
+            <section class="hero-card group">
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent-green/10 blur-[100px] group-hover:bg-accent-green/20 transition-all"></div>
+                <div class="relative z-10 space-y-6 max-w-2xl animate-fade-in-up">
+                    <span class="px-3 py-1 bg-accent-green/10 text-accent-green text-[10px] font-bold rounded-full uppercase tracking-wider">Premium Analysis</span>
+                    <h1 class="text-4xl lg:text-6xl font-bold leading-tight tracking-tight">
+                        <span id="typing-heading" class="typing-text">Real Insights.</span><br/>
+                        <span class="text-accent-blue">No Marketing Fluff.</span>
+                    </h1>
+                    <p class="text-text-main/40 text-sm lg:text-lg leading-relaxed">
+                        Deep-dive reviews of the latest coins, exchanges, and security tools. Trusted by over 50,000 traders monthly.
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <a href="#latest" class="btn-accent">Browse Latest Reviews</a>
+                        <a href="/category.html?c=Guides" class="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-xs transition-all font-bold uppercase tracking-widest flex items-center">Read Security Guides</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ad Slot -->
+            <div class="ad-slot h-32" data-ad="after-hero">After Hero Section Ad Placeholder</div>
+
+            <!-- Latest Posts -->
+            <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="col-span-full py-20 text-center text-text-main/20 uppercase tracking-widest text-xs font-bold">InSync with secure node...</div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-80 flex flex-col gap-10">
+            <div class="ad-slot h-[400px] !my-0 flex-col gap-4" data-ad="sidebar-sticky">
+                <span class="text-[9px] uppercase tracking-[0.3em] opacity-30">Ad Sponsorship</span>
+                <div class="w-48 h-48 bg-white/5 rounded border border-white/5 flex items-center justify-center text-[10px]">300 x 250</div>
+                <button class="px-4 py-2 bg-accent-blue/10 text-accent-blue text-[10px] font-bold rounded-full uppercase">Boost Trading</button>
+            </div>
+
+            <div class="glass-card p-8 space-y-6">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-accent-green">Market Sectors</h4>
+                <div class="space-y-4">
+                    <a href="/category.html?c=Coins" class="flex justify-between items-center group cursor-pointer border-b border-white/5 pb-4">
+                        <span class="text-sm text-text-main/40 group-hover:text-white transition-colors">Layer 1 Solutions</span>
+                        <span class="text-[10px] text-text-main/20">VIEW</span>
+                    </a>
+                    <a href="/category.html?c=Exchanges" class="flex justify-between items-center group cursor-pointer border-b border-white/5 pb-4">
+                        <span class="text-sm text-text-main/40 group-hover:text-white transition-colors">Global Exchanges</span>
+                        <span class="text-[10px] text-text-main/20">VIEW</span>
+                    </a>
+                    <a href="/category.html?c=Wallets" class="flex justify-between items-center group cursor-pointer border-b border-white/5 pb-4">
+                        <span class="text-sm text-text-main/40 group-hover:text-white transition-colors">Cold Storage</span>
+                        <span class="text-[10px] text-text-main/20">VIEW</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ad-slot h-48 !my-0" data-ad="sidebar-bottom">Sidebar Ad Placeholder</div>
+        </aside>
+    </main>
+
+    <footer class="bg-secondary-bg/50 border-t border-white/5 py-20 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div class="md:col-span-2">
+                    <a href="/" class="text-2xl font-black italic tracking-tighter mb-6 block">
+                        <span class="text-accent-green">CRYPTO</span>REVIEW
+                    </a>
+                    <p class="text-text-main/40 text-sm max-w-xs leading-relaxed">
+                        The web's most trusted source for crypto reviews, exchange ratings, and technical guides. We are 100% independent.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] mb-6">Explore</h4>
+                    <ul class="space-y-4 text-xs font-bold text-text-main/40 uppercase tracking-widest">
+                        <li><a href="/category.html?c=Coins" class="hover:text-accent-green">Reviews</a></li>
+                        <li><a href="/category.html?c=Guides" class="hover:text-accent-green">Security</a></li>
+                        <li><a href="/about.html" class="hover:text-accent-green">About Us</a></li>
+                        <li><a href="/contact.html" class="hover:text-accent-green">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.2em] mb-6">Legal</h4>
+                    <ul class="space-y-4 text-xs font-bold text-text-main/40 uppercase tracking-widest">
+                        <li><a href="#" class="hover:text-accent-green">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-accent-green">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-accent-green">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-accent-green">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ad-slot" data-ad="footer-banner">Footer Banner Ad Placeholder</div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 border-t border-white/5 text-[10px] uppercase font-bold tracking-[0.3em] text-text-main/20">
+                <p>&copy; 2026 CryptoReview Pro. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-text-main">Twitter</a>
+                    <a href="#" class="hover:text-text-main">Telegram</a>
+                    <a href="#" class="hover:text-text-main">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Floating Ad Bar -->
+    <div class="floating-bar px-4 sm:px-10">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-accent-green flex items-center justify-center text-[10px] font-bold text-black border-4 border-white/10">!</div>
+            <div class="text-[10px] sm:text-xs font-bold uppercase tracking-tight truncate max-w-[150px] sm:max-w-none">Bonus: Claim $50 Voucher</div>
+        </div>
+        <button class="px-4 py-2 bg-white text-black text-[10px] font-black rounded-full uppercase tracking-tighter hover:bg-accent-green transition-colors">Claim Now</button>
+        <button class="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full text-white text-[8px] flex items-center justify-center" onclick="this.parentElement.remove()">X</button>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { db, collection, getDocs, query, orderBy, limit, where } from '/assets/js/firebase.js';
+        import { renderPostCard } from '/assets/js/main.js';
+
+        // Load Posts
+        async function loadLatestPosts() {
+            const grid = document.getElementById('posts-grid');
+            const path = 'posts';
+            try {
+                const q = query(collection(db, path), where('published', '==', true), orderBy('createdAt', 'desc'), limit(6));
+                const snapshot = await getDocs(q);
+                
+                if (snapshot.empty) {
+                    grid.innerHTML = '<div class="col-span-full py-20 text-center text-text-main/20 uppercase tracking-widest text-xs font-bold">No intel available in database yet.</div>';
+                    return;
+                }
+
+                grid.innerHTML = snapshot.docs.map(doc => renderPostCard({ id: doc.id, ...doc.data() })).join('');
+                
+                // Re-init animations for new elements
+                window.dispatchEvent(new Event('DOMContentLoaded'));
+            } catch (error) {
+                console.error("Error loading posts:", error);
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-red-400">Failed to sync with secure database.</div>';
+                import('/assets/js/firebase.js').then(({ handleFirestoreError }) => {
+                    handleFirestoreError(error, 'list', path);
+                });
+            }
+        }
+
+        loadLatestPosts();
+
+        // Typing Effect
+        const typingText = document.getElementById('typing-heading');
+        const phrases = ["Honest Reviews.", "Trusted Guides.", "Real Insights."];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, charIdx--);
+                if (charIdx < 0) {
+                    isDeleting = false;
+                    phraseIdx = (phraseIdx + 1) % phrases.length;
+                    setTimeout(typeEffect, 500);
+                    return;
+                }
+            } else {
+                typingText.textContent = currentPhrase.substring(0, charIdx++);
+                if (charIdx > currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 2000);
+                    return;
+                }
+            }
+            setTimeout(typeEffect, isDeleting ? 50 : 100);
+        }
+        
+        typeEffect();
+    </script>
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>

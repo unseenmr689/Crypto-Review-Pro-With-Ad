@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - CryptoReview Pro</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-primary-bg text-text-main">
+    <nav class="bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto w-full px-6 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="logo-icon"></div>
+                <span class="text-xl font-bold tracking-tight text-white uppercase italic">CRYPTO<span class="text-accent-green">REVIEW</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-text-main/40">
+                <a href="/category.html?c=Coins" class="hover:text-white transition-colors">Coins</a>
+                <a href="/category.html?c=Exchanges" class="hover:text-white transition-colors">Exchanges</a>
+                <a href="/category.html?c=Wallets" class="hover:text-white transition-colors">Wallets</a>
+                <a href="/category.html?c=Guides" class="hover:text-white transition-colors">Guides</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        <header class="mb-16">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-accent-green mb-4">Browsing Intelligence</p>
+            <h1 id="category-title" class="text-5xl lg:text-7xl font-black tracking-tighter capitalize">Intel</h1>
+        </header>
+
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Posts injected here -->
+        </div>
+    </main>
+
+    <script type="module">
+        import { db, collection, getDocs, query, where, orderBy } from '/assets/js/firebase.js';
+        import { renderPostCard } from '/assets/js/main.js';
+
+        async function loadCategory() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('c');
+            const grid = document.getElementById('posts-grid');
+            
+            if (!category) { window.location.href = '/'; return; }
+            
+            document.getElementById('category-title').textContent = category;
+            document.title = `${category} - CryptoReview Pro`;
+
+            try {
+                const q = query(collection(db, 'posts'), where('category', '==', category), where('published', '==', true), orderBy('createdAt', 'desc'));
+                const snapshot = await getDocs(q);
+                
+                if (snapshot.empty) {
+                    grid.innerHTML = '<div class="col-span-full py-20 text-center text-text-main/20 uppercase tracking-widest text-xs font-bold">No intel available in this sector.</div>';
+                    return;
+                }
+
+                grid.innerHTML = snapshot.docs.map(doc => renderPostCard({ id: doc.id, ...doc.data() })).join('');
+            } catch (error) {
+                console.error("Load error:", error);
+            }
+        }
+        loadCategory();
+    </script>
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>

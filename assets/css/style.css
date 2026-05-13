@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg: #0B0F19;
+  --color-secondary-bg: #121826;
+  --color-card-bg: #1A2236;
+  --color-accent-green: #00E5A8;
+  --color-accent-blue: #4F8CFF;
+  --color-text-main: #E6EDF3;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-primary-bg text-text-main font-sans;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card-bg border border-white/5 rounded-2xl shadow-lg transition-all duration-300;
+  }
+  
+  .hero-card {
+    @apply relative p-10 rounded-3xl bg-secondary-bg border border-white/5 overflow-hidden;
+  }
+
+  .btn-accent {
+    @apply bg-gradient-to-r from-accent-green to-accent-blue text-primary-bg font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(0,229,168,0.3)] hover:shadow-[0_0_30px_rgba(0,229,168,0.5)] active:scale-95;
+  }
+
+  .cta-neon {
+    @apply relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-gradient-to-r from-accent-blue to-accent-green rounded-full overflow-hidden hover:shadow-[0_0_25px_rgba(79,140,255,0.6)];
+  }
+  
+  .logo-icon {
+    @apply w-8 h-8 bg-gradient-to-tr from-accent-green to-accent-blue rounded-lg rotate-12 flex items-center justify-center;
+  }
+
+  .ad-slot {
+    @apply bg-secondary-bg/50 border border-dashed border-accent-blue/20 rounded-xl flex items-center justify-center my-8 text-[10px] text-accent-blue/40 uppercase tracking-[0.2em] transition-colors hover:border-accent-blue/40;
+  }
+
+  .floating-bar {
+    @apply fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-[400px] h-14 bg-card-bg/90 backdrop-blur-md rounded-full border border-white/10 shadow-2xl flex items-center justify-between px-6 z-50;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-accent-green) }
+}
+
+.typing-text {
+  @apply overflow-hidden whitespace-nowrap border-r-2 border-accent-green;
+  display: inline-block;
+}
+
+/* Post Content Styles */
+.post-content h2 { @apply text-3xl font-bold mt-12 mb-6 tracking-tight; }
+.post-content h3 { @apply text-2xl font-bold mt-10 mb-4 tracking-tight; }
+.post-content p { @apply text-text-main/80 text-lg leading-relaxed mb-6; }
+.post-content ul { @apply list-disc list-inside space-y-4 mb-8 text-text-main/70 text-lg; }
+.post-content blockquote { @apply border-l-4 border-accent-green bg-secondary-bg/50 p-8 my-8 text-xl italic; }
+.post-content img { @apply rounded-2xl my-10 shadow-2xl; }
+.cta-container { @apply flex justify-center my-12; }

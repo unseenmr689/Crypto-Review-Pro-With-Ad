@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - CryptoReview Pro</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-primary-bg text-text-main">
+    <nav class="bg-primary-bg/80 backdrop-blur-lg border-b border-white/5 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto w-full px-6 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="logo-icon"></div>
+                <span class="text-xl font-bold tracking-tight text-white uppercase italic">CRYPTO<span class="text-accent-green">REVIEW</span></span>
+            </a>
+            <form id="search-form" class="flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2">
+                <input type="text" id="search-input" placeholder="Search intel..." class="bg-transparent border-none outline-none text-[10px] uppercase tracking-widest w-32 sm:w-48 placeholder:text-text-main/20">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-text-main/40 hover:text-accent-green transition-colors"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        <header class="mb-16">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-accent-blue mb-4">Database Query Results</p>
+            <h1 class="text-5xl font-black tracking-tighter">Searching: <span id="query-text" class="text-accent-green">...</span></h1>
+        </header>
+
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Posts injected here -->
+        </div>
+    </main>
+
+    <script type="module">
+        import { db, collection, getDocs, query, where, orderBy } from '/assets/js/firebase.js';
+        import { renderPostCard } from '/assets/js/main.js';
+
+        async function performSearch() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('q');
+            const grid = document.getElementById('posts-grid');
+            
+            if (!searchTerm) { window.location.href = '/'; return; }
+            
+            document.getElementById('query-text').textContent = `"${searchTerm}"`;
+            document.getElementById('search-input').value = searchTerm;
+
+            try {
+                // Firestore doesn't support full-text search without 3rd party
+                // We'll approximate by listing and filtering or using >= search for prefix
+                // For this demo, we'll fetch all published and filter client-side if the list is small
+                // or just do a simple prefix search which is supported.
+                const q = query(collection(db, 'posts'), where('published', '==', true));
+                const snapshot = await getDocs(q);
+                
+                const results = snapshot.docs.filter(doc => {
+                    const data = doc.data();
+                    const term = searchTerm.toLowerCase();
+                    return data.title.toLowerCase().includes(term) || 
+                           data.excerpt.toLowerCase().includes(term) ||
+                           data.category.toLowerCase().includes(term);
+                });
+
+                if (results.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full py-20 text-center text-text-main/20 uppercase tracking-widest text-xs font-bold">Zero matches found in active database.</div>';
+                    return;
+                }
+
+                grid.innerHTML = results.map(doc => renderPostCard({ id: doc.id, ...doc.data() })).join('');
+            } catch (error) {
+                console.error("Search error:", error);
+            }
+        }
+        performSearch();
+    </script>
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>
